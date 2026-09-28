@@ -1,8 +1,10 @@
 import { test, expect } from '@playwright/test';
 import {
+  DemoQaAlertsFrameWindowsPage,
   DemoQaCheckboxPage,
   DemoQaElementsPage,
   DemoQaHomePage,
+  DemoQaModalDialogsPage,
 } from '../pages/demoqa.page';
 
 test('DemoQA website is loaded', async ({ page }) => {
@@ -31,4 +33,21 @@ test('selecting Notes in the checkbox tree shows the selection', async ({ page }
   await expect(checkboxPage.selectionResult).toContainText(
     /You have selected\s*:\s*notes/i,
   );
+});
+
+test('small modal opens and closes from Modal Dialogs page', async ({ page }) => {
+  const homePage = new DemoQaHomePage(page);
+  const alertsFrameWindowsPage = new DemoQaAlertsFrameWindowsPage(page);
+  const modalDialogsPage = new DemoQaModalDialogsPage(page);
+
+  await homePage.goto();
+  await homePage.openAlertsFrameWindows();
+  await alertsFrameWindowsPage.openModalDialogs();
+  await modalDialogsPage.openSmallModal();
+
+  await expect(modalDialogsPage.smallModalDialog).toBeVisible();
+
+  await modalDialogsPage.closeSmallModal();
+
+  await expect(modalDialogsPage.smallModalDialog).toBeHidden();
 });

@@ -10,6 +10,10 @@ export class DemoQaHomePage {
     async openElements() {
         await this.page.getByRole('link', { name: 'Elements' }).click();
     }
+
+    async openAlertsFrameWindows() {
+        await this.page.getByRole('link', { name: 'Alerts, Frame & Windows' }).click();
+    }
 }
 
 export class DemoQaElementsPage {
@@ -41,5 +45,29 @@ export class DemoQaCheckboxPage {
 
     async selectCheckbox(name: string) {
         await this.page.getByRole('checkbox', { name: `Select ${name}` }).click();
+    }
+}
+
+export class DemoQaAlertsFrameWindowsPage {
+    constructor(private readonly page: Page) { }
+
+    async openModalDialogs() {
+        await this.page.getByRole('link', { name: 'Modal Dialogs' }).click();
+    }
+}
+
+export class DemoQaModalDialogsPage {
+    constructor(private readonly page: Page) { }
+
+    get smallModalDialog(): Locator {
+        return this.page.locator('#example-modal-sizes-title-sm');
+    }
+
+    async openSmallModal() {
+        await this.page.getByRole('button', { name: 'Small modal' }).click();
+    }
+
+    async closeSmallModal() {
+        await this.page.getByRole('button', { name: 'Close' }).click();
     }
 }
