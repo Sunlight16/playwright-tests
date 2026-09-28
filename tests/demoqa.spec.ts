@@ -3,7 +3,7 @@ import {
   DemoQaCheckboxPage,
   DemoQaElementsPage,
   DemoQaHomePage,
-} from './pages/demoqa.page';
+} from '../pages/demoqa.page';
 
 test('DemoQA website is loaded', async ({ page }) => {
   const homePage = new DemoQaHomePage(page);
